@@ -11,6 +11,7 @@
     );
     let user = await res.json();
     users = user.results;
+    console.log(users[1]);
   });
   $: filteredMonsters = searchTerm
     ? users.filter((monster) =>
@@ -24,7 +25,7 @@
   <input
     class="search-box"
     type="search"
-    placeholder="Search Monsters"
+    placeholder="Search Pokemons"
     bind:value={searchTerm}
   />
   <div class="card-list">
@@ -34,8 +35,8 @@
           alt={`${user.name} sprite`}
           src={`https://img.pokemondb.net/artwork/${user.name}.jpg`}
         />
-        <h2>{user.name}</h2>
-        <!-- <p>{user.email}</p> -->
+        <h2>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</h2>
+        <p>Pokedex nº {user.url.slice(30).replace(/\D/g, "")}</p>
       </div>
     {/each}
   </div>
