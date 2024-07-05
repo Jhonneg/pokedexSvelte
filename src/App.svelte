@@ -6,10 +6,11 @@
   let filteredMonsters = [];
 
   onMount(async () => {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
+    const res = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151"
+    );
     let user = await res.json();
-    users = user.results
-    console.log(user);
+    users = user.results;
   });
   $: filteredMonsters = searchTerm
     ? users.filter((monster) =>
@@ -29,10 +30,10 @@
   <div class="card-list">
     {#each filteredMonsters as user}
       <div class="card-container">
-        <!-- <img
-          alt={`monster ${user.name}`}
-          src={`https://robohash.org/${user.id}?set=set2&size=180x180`}
-        /> -->
+        <img
+          alt={`${user.name} sprite`}
+          src={`https://img.pokemondb.net/artwork/${user.name}.jpg`}
+        />
         <h2>{user.name}</h2>
         <!-- <p>{user.email}</p> -->
       </div>
