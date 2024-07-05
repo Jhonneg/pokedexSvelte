@@ -6,8 +6,10 @@
   let filteredMonsters = [];
 
   onMount(async () => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
-    users = await res.json();
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
+    let user = await res.json();
+    users = user.results
+    console.log(user);
   });
   $: filteredMonsters = searchTerm
     ? users.filter((monster) =>
@@ -17,7 +19,7 @@
 </script>
 
 <main>
-  <h1>Search Monsters</h1>
+  <h1>Search Pokemons</h1>
   <input
     class="search-box"
     type="search"
@@ -27,12 +29,12 @@
   <div class="card-list">
     {#each filteredMonsters as user}
       <div class="card-container">
-        <img
+        <!-- <img
           alt={`monster ${user.name}`}
           src={`https://robohash.org/${user.id}?set=set2&size=180x180`}
-        />
+        /> -->
         <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <!-- <p>{user.email}</p> -->
       </div>
     {/each}
   </div>
